@@ -149,7 +149,7 @@ _start:
 ; =-=-= Byte arithmetic =-=-=
 
 ; ADDITION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; bAns1 = bNum1 + bNum4
 mov al, byte[bNum1] ; Move to lower 8 bit register
 add al, byte[bNum4] ; Perform addition
@@ -162,7 +162,7 @@ mov byte[bAns2], al
 mov al, byte[bNum3]
 add al, byte[bNum3]
 mov byte[bAns3], al
-; SIGNED (+)
+; SIGNED (+/-)
 ; bAns4 = bNum5 + bNum6
 mov al, byte[bNum5]
 add al, byte[bNum6]
@@ -173,7 +173,7 @@ add al, byte[bNum8]
 mov byte[bAns5], al
 
 ; SUBTRACTION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; bAns6 = bNum4 - bNum3
 mov al, byte[bNum4]
 sub al, byte[bNum3]
@@ -186,7 +186,7 @@ mov byte[bAns7], al
 mov al, byte[bNum2]
 sub al, byte[bNum1]
 mov byte[bAns8], al
-; SIGNED (+)
+; SIGNED (+/-)
 ; bAns9 = bNum6 - bNum6
 mov al, byte[bNum6]
 sub al, byte[bNum6]
@@ -197,7 +197,7 @@ sub al, byte[bNum7]
 mov byte[bAns10], al
 
 ; MULTIPLICATION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; wAns11 = bNum1 * bNum2
 mov al, byte[bNum1] ; Move to lower 8 bit register
 mul byte[bNum2] ; Answer is stored in ah:al or ax
@@ -210,7 +210,7 @@ mov word[wAns12], ax
 mov al, byte[bNum3]
 mul byte[bNum3]
 mov word[wAns13], ax
-; SIGNED (+)
+; SIGNED (+/-)
 ; wAns14 = bNum5 * bNum8
 mov al, byte[bNum5]
 imul byte[bNum8]
@@ -221,7 +221,7 @@ imul byte[bNum7]
 mov word[wAns15], ax
 
 ; DIVISION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; bAns16 = bNum4 / bNum2
 mov ah, 0 ; ah is sign extended since bNum4 can fit in al
 mov al, byte[bNum4] ; Dividend must be ah:al or ax
@@ -238,7 +238,7 @@ div byte[bNum1]
 mov byte[bAns18], al
 ; bRem18 = wNum4 % bNum1
 mov byte[bRem18], ah
-; SIGNED (+)
+; SIGNED (+/-)
 ; bAns19 = bNum5 / bNum7
 mov al, byte[bNum5]
 cbw ; Converts byte to word
@@ -259,7 +259,7 @@ mov byte[bRem21], ah
 ; =-=-= Word arithmetic =-=-=
 
 ; ADDITION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; wAns1 = wNum2 + wNum3
 mov ax, word[wNum2]
 add ax, word[wNum3]
@@ -272,7 +272,7 @@ mov word[wAns2], ax
 mov ax, word[wNum2]
 add ax, word[wNum1]
 mov word[wAns3], ax
-; SIGNED (+)
+; SIGNED (+/-)
 ; wAns4 = wNum5 + wNum8
 mov ax, word[wNum5]
 add ax, word[wNum8]
@@ -283,7 +283,7 @@ add ax, word[wNum7]
 mov word[wAns5], ax
 
 ; SUBTRACTION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; wAns6 = wNum4 - wNum1
 mov ax, word[wNum4]
 sub ax, word[wNum1]
@@ -296,7 +296,7 @@ mov word[wAns7], ax
 mov ax, word[wNum2]
 sub ax, word[wNum1]
 mov word[wAns8], ax
-; SIGNED (+)
+; SIGNED (+/-)
 ; wAns9 = wNum5 - wNum7
 mov ax, word[wNum5]
 sub ax, word[wNum7]
@@ -307,7 +307,7 @@ sub ax, word[wNum6]
 mov word[wAns10], ax
 
 ; MULTIPLICATION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; dAns11 = wNum1 * wNum3
 mov ax, word[wNum1]
 mul word[wNum3]
@@ -323,7 +323,7 @@ mov ax, word[wNum2]
 mul word[wNum2]
 mov word[dAns13], ax
 mov word[dAns13 + 2], dx
-; SIGNED (+)
+; SIGNED (+/-)
 ; dAns14 = wNum6 * wNum7
 mov ax, word[wNum6]
 imul word[wNum7]
@@ -336,7 +336,7 @@ mov word[dAns15], ax
 mov word[dAns15 + 2], dx
 
 ; DIVISION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; wAns16 = wNum4 / wNum2
 mov dx, 0 ; Sign extend dx
 mov ax, word[wNum4] ; Dividend must be dx:ax
@@ -354,7 +354,7 @@ div word[wNum3]
 mov word[wAns18], ax
 ; wRem18 = dNum4 % wNum3
 mov word[wRem18], dx
-; SIGNED (+)
+; SIGNED (+/-)
 ; wAns19 = wNum5 / wNum7
 mov ax, word[wNum5]
 cwd ; Converts word to dword
@@ -376,7 +376,7 @@ mov word[wRem21], dx
 ; =-=-= Double word arithmetic =-=-=
 
 ; ADDITION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; dAns1 = dNum1 + dNum3
 mov eax, dword[dNum1]
 add eax, dword[dNum3]
@@ -389,7 +389,7 @@ mov dword[dAns2], eax
 mov eax, dword[dNum2]
 add eax, dword[dNum4]
 mov dword[dAns3], eax
-; SIGNED (+)
+; SIGNED (+/-)
 ; dAns4 = dNum7 + dNum5 
 mov eax, dword[dNum7]
 add eax, dword[dNum5]
@@ -400,7 +400,7 @@ add eax, dword[dNum6]
 mov dword[dAns5], eax
 
 ; SUBTRACTION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; dAns6 = dNum1 - dNum2
 mov eax, dword[dNum1]
 sub eax, dword[dNum2]
@@ -413,7 +413,7 @@ mov dword[dAns7], eax
 mov eax, dword[dNum3]
 sub eax, dword[dNum1]
 mov dword[dAns8], eax
-; SIGNED (+)
+; SIGNED (+/-)
 ; dAns9 = dNum5 - dNum8
 mov eax, dword[dNum5]
 sub eax, dword[dNum8]
@@ -424,7 +424,7 @@ sub eax, dword[dNum6]
 mov dword[dAns10], eax
 
 ; MULTIPLICATION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; qAns11 = dNum4 * dNum1
 mov eax, dword[dNum4]
 mul dword[dNum1]
@@ -440,7 +440,7 @@ mov eax, dword[dNum2]
 mul dword[dNum1]
 mov dword[qAns13], eax
 mov dword[qAns13 + 4], edx
-; SIGNED (+)
+; SIGNED (+/-)
 ; qAns14 = dNum7 * dNum5
 mov eax, dword[dNum7]
 imul dword[dNum5]
@@ -453,7 +453,7 @@ mov dword[qAns15], eax
 mov dword[qAns15 + 4], edx
 
 ; DIVISION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; dAns16 = dNum1 / dNum3
 mov edx, 0
 mov eax, dword[dNum1]
@@ -471,7 +471,7 @@ div dword[dNum3]
 mov dword[dAns18], eax
 ; dRem18 = qAns12 % dNum3
 mov dword[dRem18], edx
-; SIGNED (+)
+; SIGNED (+/-)
 ; dAns19 = dNum5 / dNum7
 mov eax, dword[dNum5]
 cdq ; Converts dword to qword
@@ -493,7 +493,7 @@ mov dword[dRem21], edx
 ; =-=-= Quad word arithmetic =-=-=
 
 ; ADDITION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; qAns1 = qNum1 + qNum2
 mov rax, qword[qNum1]
 add rax, qword[qNum2]
@@ -506,7 +506,7 @@ mov qword[qAns2], rax
 mov rax, qword[qNum3]
 add rax, qword[qNum4]
 mov qword[qAns3], rax
-; SIGNED (+)
+; SIGNED (+/-)
 ; qAns4 = qNum5 + qNum7
 mov rax, qword[qNum5]
 add rax, qword[qNum7]
@@ -517,7 +517,7 @@ add rax, qword[qNum8]
 mov qword[qAns5], rax
 
 ; SUBTRACTION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; qAns6 = qNum4 - qNum1
 mov rax, qword[qNum4]
 sub rax, qword[qNum1]
@@ -530,7 +530,7 @@ mov qword[qAns7], rax
 mov rax, qword[qNum2]
 sub rax, qword[qNum1]
 mov qword[qAns8], rax
-; SIGNED (+)
+; SIGNED (+/-)
 ; qAns9 = qNum8 - qNum6
 mov rax, qword[qNum8]
 sub rax, qword[qNum6]
@@ -541,7 +541,7 @@ sub rax, qword[qNum7]
 mov qword[qAns10], rax
 
 ; MULTIPLICATION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; dqAns11 = qNum1 * qNum3
 mov rax, qword[qNum1]
 mul qword[qNum3]
@@ -557,7 +557,7 @@ mov rax, qword[qNum1]
 mul qword[qNum2]
 mov qword[dqAns13], rax
 mov qword[dqAns13 + 8], rdx
-; SIGNED (+)
+; SIGNED (+/-)
 ; dqAns14 = qNum5 * qNum7
 mov rax, qword[qNum5]
 imul qword[qNum7]
@@ -570,7 +570,7 @@ mov qword[dqAns15], rax
 mov qword[dqAns15 + 8], rdx
 
 ; DIVISION
-; UNSIGNED (+/-)
+; UNSIGNED (+)
 ; qAns16 = qNum4 / qNum1
 mov rdx, 0
 mov rax, qword[qNum4]
@@ -588,7 +588,7 @@ div qword[qNum3]
 mov qword[qAns18], rax
 ; qRem18 = dqAns12 % qNum3
 mov qword[qRem18], rdx
-; SIGNED (+)
+; SIGNED (+/-)
 ; qAns19 = qNum5 / qNum7
 mov rax, qword[qNum5]
 cqo ; Converts qword to oword
